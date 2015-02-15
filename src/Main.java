@@ -42,17 +42,11 @@ public class Main {
             inputStream.close();
         }
 
-        DbxEntry.WithChildren listing = client.getMetadataWithChildren("/");
-        System.out.println("Files in the root path:");
-        for (DbxEntry child : listing.children) {
-            System.out.println("	" + child.name + ": " + child.toString());
-        }
-
-        FileOutputStream outputStream = new FileOutputStream("uploaded-file.txt");
+        FileOutputStream outputStream = new FileOutputStream(workingDirectoryPath + "uploaded-file.txt");
         try {
             DbxEntry.File downloadedFile = client.getFile("/uploaded-file.txt", null,
                 outputStream);
-            System.out.println("Metadata: " + downloadedFile.toString());
+            System.out.println("Downloaded: " + downloadedFile.toString());
         } finally {
             outputStream.close();
         }
