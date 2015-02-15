@@ -30,14 +30,11 @@ public class Main {
 
         DbxClient client = new DbxClient(config, accessToken);
 
-        System.out.println("Linked account: " + client.getAccountInfo().displayName);
-
         File inputFile = new File(workingDirectoryPath + inputFileName);
         FileInputStream inputStream = new FileInputStream(inputFile);
         try {
             DbxEntry.File uploadedFile = client.uploadFile("/uploaded-file.txt",
                 DbxWriteMode.add(), inputFile.length(), inputStream);
-            System.out.println("Uploaded: " + uploadedFile.toString());
         } finally {
             inputStream.close();
         }
@@ -46,7 +43,6 @@ public class Main {
         try {
             DbxEntry.File downloadedFile = client.getFile("/uploaded-file.txt", null,
                 outputStream);
-            System.out.println("Downloaded: " + downloadedFile.toString());
         } finally {
             outputStream.close();
         }
